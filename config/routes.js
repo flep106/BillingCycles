@@ -7,13 +7,10 @@ module.exports = function (server) {
 
     server.use('/api', router)
     
-    // foi apenas para teste de URL
-    // router.route('/teste').get(function(req, res){
-    //   res.send('funcionou')
-    // }) 
-
-    //rotas da PI
+    //rotas da API
     const billingCycleService = require('../api/billingCycle/billingCycleService')
-
     billingCycleService.register(router, '/billingCycles')
+
+    const billingCycleSummaryService = require('../api/billingSummary/billingSummaryService')
+    router.route('/billingSummary').get(billingCycleSummaryService.getSummary)
   }
